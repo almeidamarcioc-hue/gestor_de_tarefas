@@ -166,15 +166,17 @@ app.delete('/schedule/:id', async (req, res) => {
   }
 });
 
-// Inicia o servidor
-app.listen(port, async () => {
-  console.log(`Servidor à escuta na porta ${port}`);
-  try {
-    await pool.query('SELECT NOW()');
-    console.log('\x1b[32m%s\x1b[0m', 'Ligado à base de dados Neon com sucesso!');
-    reschedulePendingTasks();
-  } catch (error) {
-    console.error('\x1b[31m%s\x1b[0m', 'Falha ao ligar à base de dados Neon:', error.message);
-  }
-});
+// Inicia o reagendamento de tarefas pendentes na inicialização
+(async () => {
+    try {
+        await pool.query('SELECT NOW()');
+        console.log('\x1b[32m%s\x1b[0m', 'Ligado à base de dados Neon com sucesso!');
+        await reschedulePendingTasks();
+    } catch (error) {
+        console.error('\x1b[31m%s\x1b[0m', 'Falha ao ligar à base de dados Neon ou reagendar tarefas:', error.message);
+    }
+})();
+
+// Exporta a aplicação para o Vercel
+module.exports = app;
 
