@@ -1,0 +1,10 @@
+[
+  {
+    "id": "ba329ccb-5e69-4fb7-a008-60bd0e37d4b0",
+    "scheduleTime": "2025-10-04T18:22:00.000Z",
+    "destinationId": "Notificações",
+    "message": "*Lembrete: teste* 📝\n\n*A Fazer:*\nteste\n\n---\n*Assunto Principal:*\nteste",
+    "mentionAll": true,
+    "status": "SENT"
+  }
+]
