@@ -38,6 +38,12 @@ const scheduledTasks = new Map();
 app.use(cors());
 app.use(express.json());
 
+// Middleware de log para depuração
+app.use((req, res, next) => {
+  console.log('Request received for URL:', req.url);
+  next();
+});
+
 // Função encapsulada para agendar o envio
 const scheduleMessage = (id, scheduleTime, destinationId, message, mentionAll) => {
     const delay = new Date(scheduleTime).getTime() - Date.now();
