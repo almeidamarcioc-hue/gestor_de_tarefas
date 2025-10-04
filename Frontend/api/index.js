@@ -91,12 +91,14 @@ const reschedulePendingTasks = async () => {
 
 // --- ROTAS DA API ---
 
-app.get('/destinations', (req, res) => {
+const apiRouter = express.Router();
+
+apiRouter.get('/destinations', (req, res) => {
   const destinationList = Object.keys(WEBHOOKS).map(key => ({ id: key, name: key }));
   res.json(destinationList);
 });
 
-app.get('/schedules/history', async (req, res) => {
+apiRouter.get('/schedules/history', async (req, res) => {
     try {
         const { rows } = await pool.query('SELECT * FROM schedules ORDER BY schedule_time DESC');
         // Mapeia os nomes das colunas para os nomes esperados pelo frontend
@@ -115,7 +117,7 @@ app.get('/schedules/history', async (req, res) => {
     }
 });
 
-app.post('/schedule', async (req, res) => {
+apiRouter.post('/schedule', async (req, res) => {
   console.log('Recebido pedido para /schedule com o corpo:', req.body);
   const { id, scheduleTime, destinationId, message, mentionAll } = req.body;
 
@@ -150,7 +152,7 @@ app.post('/schedule', async (req, res) => {
   }
 });
 
-app.delete('/schedule/:id', async (req, res) => {
+apiRouter.delete('/schedule/:id', async (req, res) => {
   const { id } = req.params;
   try {
     if (scheduledTasks.has(id)) {
@@ -165,6 +167,8 @@ app.delete('/schedule/:id', async (req, res) => {
     res.status(500).json({ error: 'Erro ao cancelar.' });
   }
 });
+
+app.use('/api', apiRouter);
 
 // Inicia o reagendamento de tarefas pendentes na inicialização
 (async () => {
