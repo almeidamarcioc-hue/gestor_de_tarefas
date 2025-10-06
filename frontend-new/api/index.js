@@ -24,10 +24,7 @@ const WEBHOOKS = {
 
 // Configuração da ligação à base de dados Neon
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  connectionString: process.env.DATABASE_URL
 });
 
 // Armazena os agendamentos ativos em memória.
