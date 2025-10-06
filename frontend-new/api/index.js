@@ -1,5 +1,3 @@
-console.log("API function started");
-
 // Carrega as variáveis de ambiente do ficheiro .env
 require('dotenv').config();
 
