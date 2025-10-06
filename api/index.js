@@ -174,5 +174,12 @@ app.delete('/schedule/:id', async (req, res) => {
     }
 })();
 
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
+
 // Exporta a aplicação para o Vercel
 module.exports = app;
