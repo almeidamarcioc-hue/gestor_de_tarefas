@@ -2,9 +2,9 @@
   "name": "taskzap-backend-neon",
   "version": "1.0.0",
   "description": "Servidor para o Gestor de Tarefas com base de dados Neon.",
-  "main": "../api/index.js",
+  "main": "../frontend-new/api/index.js",
   "scripts": {
-    "start": "node ../api/index.js"
+    "start": "node ../frontend-new/api/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
